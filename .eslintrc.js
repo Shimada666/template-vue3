@@ -79,6 +79,6 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 'off'
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    ecmaVersion: 2020
   }
 }

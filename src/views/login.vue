@@ -2,9 +2,9 @@
   <div class="register">
     <el-row style="width: 90%; margin: 0 auto; display: flex; align-items: center; flex-wrap: wrap;">
       <el-col
-          class="slogan"
-          :xs="24"
-          :sm="14">
+        class="slogan"
+        :xs="24"
+        :sm="14">
         <div>
           Built for<br>
           SJTUers
@@ -16,35 +16,35 @@
         <!--</div>-->
       </el-col>
       <el-col
-          :xs="24"
-          :sm="10">
+        :xs="24"
+        :sm="10">
         <el-form
-            ref="ruleForm"
-            class="register-form"
-            label-position="top"
-            label-width="80px"
-            :model="formModel">
+          ref="ruleForm"
+          class="register-form"
+          label-position="top"
+          label-width="80px"
+          :model="formModel">
           <el-form-item
-              label="用户名"
-              prop="username"
-              :rules="[
+            label="用户名"
+            prop="username"
+            :rules="[
               { required: true, message: '请输入用户名', trigger: 'blur' },
             ]">
             <el-input v-model="formModel.username" />
           </el-form-item>
           <el-form-item
-              prop="password"
-              label="密码"
-              :rules="[
+            prop="password"
+            label="密码"
+            :rules="[
               { required: true, message: '请输入密码', trigger: 'blur' },
             ]">
             <el-input v-model="formModel.password" type="password" />
           </el-form-item>
           <el-form-item>
             <el-button
-                style="display: block; width: 100%;"
-                type="primary"
-                @click="onSubmit">
+              style="display: block; width: 100%;"
+              type="primary"
+              @click="onSubmit">
               登录
             </el-button>
           </el-form-item>
@@ -56,7 +56,6 @@
 
 <script lang="ts">
 import { AdminApi } from '@/api/admin'
-import Cookies from 'js-cookie'
 import { defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -71,8 +70,6 @@ export default defineComponent({
     const ruleForm = ref()
     const login = async () => {
       const res = await AdminApi.login(formModel)
-      Cookies.set('accessToken', res.data.accessToken)
-      Cookies.set('refreshToken', res.data.refreshToken)
       await router.replace('/')
     }
     const onSubmit = async () => {

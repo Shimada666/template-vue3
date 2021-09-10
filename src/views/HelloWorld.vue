@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+const count = ref(0)
+</script>
+
 <template>
   <div style="text-align: center;">
     <img alt="Vue logo" src="../assets/logo.png">
@@ -30,32 +35,6 @@
     </p>
   </div>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-export default defineComponent({
-  name: 'HelloWorld',
-  setup: () => {
-    const count = ref(0)
-    return { count }
-  }
-})
-
-// If you use script setup syntax, your code will look like this, it's simpler.
-// But webstorm(2021.1 and below version) can't support it, you can use vscode + volar
-//
-// You must use: <script setup lang="ts">
-// Then..
-//
-// import { ref } from 'vue'
-//
-// const name = 'HelloWorld'
-// const count = ref(0)
-
-// Even script setup + ref sugar..
-// const name = 'HelloWorld'
-// ref: count = 0
-</script>
 
 <style scoped>
 a {

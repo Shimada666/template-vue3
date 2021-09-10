@@ -41,40 +41,6 @@ $ yarn install
 ```bash
 $ yarn run dev
 ```
-
-## 使用 script setup 语法，甚至 ref sugar
-在示例 HelloWorld.vue 中, 我们使用了 compositon api(raw) 语法，代码像这样
-### composition api(raw)
-```html
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-export default defineComponent({
-  name: 'HelloWorld',
-  setup: () => {
-    const count = ref(0)
-    return { count }
-  }
-})
-</script>
-```
-但是如果你使用 script setup 语法，代码将更加简单
-### script setup
-```html
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const name = 'HelloWorld'
-const count = ref(0)
-</script>
-```
-很可惜 script setup，暂时目前 webstorm(2021.1) 不支持，你只能用 vscode + volar
-### 更激进的 ref sugar
-```html
-<script setup lang="ts">
-const name = 'HelloWorld'
-ref: count = 0
-</script>
-```
 > [@vue/compiler-sfc] ref: sugar is still an experimental proposal.
 > Follow its status at https://github.com/vuejs/rfcs/pull/228.
 ## Git 仓库 分支和提交约定
