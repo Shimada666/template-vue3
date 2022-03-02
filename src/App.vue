@@ -2,18 +2,10 @@
   <Layout />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from '@/views/HelloWorld.vue'
+<script lang="ts" setup>
 import Layout from '@/components/layout/index.vue'
 import '@/assets/style/share.scss'
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    Layout
-  }
-})
 </script>
 
 <style>

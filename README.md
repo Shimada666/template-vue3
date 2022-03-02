@@ -13,7 +13,7 @@ $ cd my-app
 - [x] Vue3   
 - [x] Vite2  
 - [x] Typescript  
-- [x] ElementPlus  
+- [x] Antd  
 - [x] Vue-Router  
 - [x] Vuex  
 - [x] node-sass  

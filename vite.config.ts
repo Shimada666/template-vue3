@@ -1,10 +1,13 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
+import WindiCSS from 'vite-plugin-windicss'
 import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [vue(), vueJsxPlugin()],
+  plugins: [vue(), vueJsxPlugin(), WindiCSS({
+    preflight: false
+  })],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')
@@ -18,5 +21,5 @@ export default defineConfig({
         changeOrigin: true
       }
     }
-  }
+  },
 })

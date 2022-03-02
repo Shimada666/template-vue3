@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from './router'
-import elementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
+
+import 'virtual:windi.css'
 
 const app = createApp(App)
 app.use(router)
-  .use(elementPlus)
+  .use(Antd)
   .mount('#app')

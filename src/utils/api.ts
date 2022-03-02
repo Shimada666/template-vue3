@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from './config'
 import Cookies from 'js-cookie'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { redirectLogin, refreshTokenException } from './auth'
 
 const service = axios.create(config)
@@ -32,34 +32,38 @@ service.interceptors.response.use(
     return res.data
   },
   async err => {
-    let { error } = err.response.data
-    return new Promise(async (resolve, reject) => {
-      const { url } = err.config
+    if (err.response.status === 401 || err.response.status === 422) {
+      let { error } = err.response.data
+      return new Promise(async (resolve, reject) => {
+        const { url } = err.config
 
-      // refreshToken相关，直接登出
-      if (refreshTokenException(error.code)) {
-        redirectLogin()
-        return resolve(null)
-      }
-      // accessToken相关，刷新令牌
-      if (error.code === 10041 || error.code === 10051) {
-        const cache = {}
-        if (cache['url'] !== url) {
-          cache['url'] = url
-          const refreshRes = await service.post('api/v1/refresh')
-          Cookies.set('accessToken', refreshRes.data.accessToken)
-          // 将上次失败请求重发
-          const previousRes = await service(err.config)
-          return resolve(previousRes)
+        // refreshToken相关，直接登出
+        if (refreshTokenException(error.code)) {
+          redirectLogin()
+          return resolve(null)
         }
-      }
-      ElMessage({
-        showClose: true,
-        type: 'warning',
-        message: error.message
+        // accessToken相关，刷新令牌
+        if (error.code === 10041 || error.code === 10051) {
+          const cache = {}
+          if (cache['url'] !== url) {
+            cache['url'] = url
+            const refreshRes = await service.post('api/v1/refresh')
+            Cookies.set('accessToken', refreshRes.data.accessToken)
+            // 将上次失败请求重发
+            const previousRes = await service(err.config)
+            return resolve(previousRes)
+          }
+        }
+        message.warning(error.message)
       })
-      return Promise.reject(err)
-    })
+    } else {
+      if (err.response.data) {
+        message.error(err.response.data.error.message)
+      } else {
+        message.error(err.message)
+      }
+    }
+    return Promise.reject(err)
   }
   // res => {
   //   const { code, message } = res.data
