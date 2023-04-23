@@ -1,94 +1,27 @@
 import axios from 'axios'
 import config from './config'
-import Cookies from 'js-cookie'
-import { message } from 'ant-design-vue'
-import { redirectLogin, refreshTokenException } from './auth'
 
 const service = axios.create(config)
 // POST 传参序列化
 service.interceptors.request.use(
-  config => {
-    if (config.url === 'api/v1/refresh') {
-      const refreshToken = Cookies.get('refreshToken')
-      if (refreshToken) {
-        config.headers.Authorization = 'Bearer ' + refreshToken
-      }
-    } else {
-      // 有accessToken
-      const accessToken = Cookies.get('accessToken')
-      if (accessToken) {
-        config.headers.Authorization = 'Bearer ' + accessToken
-      }
-    }
+  (config) => {
     return config
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
-  }
+  },
 )
 // 返回状态判断
 service.interceptors.response.use(
-  res => {
+  (res) => {
     return res.data
   },
-  async err => {
-    if (err.response.status === 401 || err.response.status === 422) {
-      let { error } = err.response.data
-      return new Promise(async (resolve, reject) => {
-        const { url } = err.config
-
-        // refreshToken相关，直接登出
-        if (refreshTokenException(error.code)) {
-          redirectLogin()
-          return resolve(null)
-        }
-        // accessToken相关，刷新令牌
-        if (error.code === 10041 || error.code === 10051) {
-          const cache = {}
-          if (cache['url'] !== url) {
-            cache['url'] = url
-            const refreshRes = await service.post('api/v1/refresh')
-            Cookies.set('accessToken', refreshRes.data.accessToken)
-            // 将上次失败请求重发
-            const previousRes = await service(err.config)
-            return resolve(previousRes)
-          }
-        }
-        message.warning(error.message)
-      })
-    } else {
-      if (err.response.data) {
-        message.error(err.response.data.error.message)
-      } else {
-        message.error(err.message)
-      }
-    }
-    return Promise.reject(err)
-  }
-  // res => {
-  //   const { code, message } = res.data
-  //   if (code === 401) {
-  //     redirectLogin()
-  //   }
-  //   if (code !== 200) {
-  //     Message.warning(`${message}`)
-  //     return Promise.reject(res.data)
-  //   } else {
-  //     return res.data
-  //   }
-  // },
-  // error => {
-  //   if (error.response.status === 401) {
-  //     redirectLogin()
-  //   } else {
-  //     Message({
-  //       showClose: true,
-  //       type: 'warning',
-  //       message: error.message
-  //     })
-  //   }
-  //   return Promise.reject(error)
-  // }
+  async (err) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return new Promise((resolve, reject) => {
+      return Promise.reject(err)
+    })
+  },
 )
 
 export default service

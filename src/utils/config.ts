@@ -1,17 +1,14 @@
-import { AxiosResponse, AxiosRequestConfig } from 'axios'
-import { jsonCamel2Line, jsonLine2Camel } from '@/utils/json'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: '/',
   // 请求前的数据处理
-  transformRequest: [function (data: any, headers) {
-    headers['Content-Type'] = 'application/json'
-    jsonCamel2Line(data)
-    return JSON.stringify(data)
-  }],
+  // transformRequest: [function (data: any, headers) {
+  //   headers['Content-Type'] = 'application/json'
+  //   return JSON.stringify(data)
+  // }],
   // 请求后的数据处理
   transformResponse: [function (data: AxiosResponse) {
-    jsonLine2Camel(data)
     return data
   }],
   // 自定义的请求头
@@ -32,10 +29,10 @@ const axiosConfig: AxiosRequestConfig = {
   xsrfHeaderName: 'X-XSRF-TOKEN',
 
   // 下传和下载进度回调
-  onUploadProgress: function (progressEvent: any) {
+  onUploadProgress(progressEvent: any) {
     Math.round(progressEvent.loaded * 100 / progressEvent.total)
   },
-  onDownloadProgress: function (progressEvent: any) {
+  onDownloadProgress(progressEvent: any) {
     Math.round(progressEvent.loaded * 100 / progressEvent.total)
   },
   // 最多转发数，用于node.js
@@ -43,9 +40,9 @@ const axiosConfig: AxiosRequestConfig = {
   // 最大响应数据大小
   maxContentLength: 2000,
   // 自定义错误状态码范围
-  validateStatus: function (status: number) {
+  validateStatus(status: number) {
     return status >= 200 && status < 300
-  }
+  },
 }
 
 export default axiosConfig

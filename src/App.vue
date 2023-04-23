@@ -1,12 +1,11 @@
-<template>
-  <Layout />
-</template>
-
 <script lang="ts" setup>
 import Layout from '@/components/layout/index.vue'
 import '@/assets/style/share.scss'
-
 </script>
+
+<template>
+  <Layout />
+</template>
 
 <style>
 #app {
