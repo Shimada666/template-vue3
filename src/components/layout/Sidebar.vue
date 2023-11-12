@@ -4,7 +4,7 @@ import { LaptopOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const clickMenuItem = ({ item, key, keyPath }: any) => {
+function clickMenuItem({ item, key, keyPath }: any) {
   router.push({ name: key })
 }
 
@@ -15,14 +15,14 @@ const openKeys = ref<string[]>(['sub1'])
 </script>
 
 <template>
-  <a-layout-sider width="200" style="background: #fff;">
+  <a-layout-sider width="240" style="background: #fff;">
     <div class="logo">
       Hi, I'm Ergo
     </div>
     <a-menu
       v-model:selectedKeys="selectedKeys2"
       v-model:openKeys="openKeys"
-      :style="{ height: '100%', borderRight: 0 }"
+      :style="{ borderRight: 0 }"
       mode="inline"
       @click="clickMenuItem"
     >
