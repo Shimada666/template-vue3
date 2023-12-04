@@ -17,7 +17,7 @@ service.interceptors.response.use(
     return res.data
   },
   async (err) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line unused-imports/no-unused-vars
     return new Promise((resolve, reject) => {
       return Promise.reject(err)
     })

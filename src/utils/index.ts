@@ -1,4 +1,4 @@
-const dateFormat = (date: Date, format = 'yyyy-MM-dd hh:mm:ss') => {
+function dateFormat(date: Date, format = 'yyyy-MM-dd hh:mm:ss') {
   const o = {
     'M+': date.getMonth() + 1,
     'd+': date.getDate(),
@@ -26,7 +26,7 @@ const dateFormat = (date: Date, format = 'yyyy-MM-dd hh:mm:ss') => {
   return format
 }
 
-const queryString = (key: string) => {
+function queryString(key: string) {
   const url = location.search || location.hash
   const re = new RegExp(`${key}=([^&?#/]*)`, 'ig')
   return url.match(re) ? decodeURI((url as any).match(re)[0].substr(key.length + 1)) : ''

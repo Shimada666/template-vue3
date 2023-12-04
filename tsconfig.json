@@ -1,23 +1,22 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ES2021",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "lib": [
       "esnext",
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-
   "references": [
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"]
 }

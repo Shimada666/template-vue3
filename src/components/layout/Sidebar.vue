@@ -4,13 +4,13 @@ import { LaptopOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+// eslint-disable-next-line unused-imports/no-unused-vars
 function clickMenuItem({ item, key, keyPath }: any) {
   router.push({ name: key })
 }
 
-const selectedKeys1 = ref<string[]>(['2'])
 const selectedKeys2 = ref<string[]>(['1'])
-const collapsed = ref<boolean>(false)
 const openKeys = ref<string[]>(['sub1'])
 </script>
 

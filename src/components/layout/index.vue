@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
 import Nav from '@/components/layout/Nav.vue'
 import SideBar from '@/components/layout/Sidebar.vue'
-
-const route = useRoute()
 </script>
 
 <template>

@@ -6,7 +6,7 @@ interface LoginResp {
 }
 
 class Admin {
-  login(params: { username: string; password: string }): Ajax.PromiseAxiosResponse<LoginResp> {
+  login(params: { username: string, password: string }): Ajax.PromiseAxiosResponse<LoginResp> {
     return service.post('/api/v1/login', params)
   }
 }
